@@ -1,18 +1,13 @@
 // services/articleService.js
 
 const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-const dbPath = path.join(__dirname, 'database.db');
 
-
-let db = new sqlite3.Database(':memory:', (err) => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log('Connected to the chinook database.');
-  });
+const db = new sqlite3.Database(':memory:');
 
 // Crear la tabla de artículos
+db.serialize(() => {
+  db.run('CREATE TABLE articles (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, marca TEXT, tipo TEXT, stock INTEGER)');
+});
 
 exports.getAllArticles = () => {
   return new Promise((resolve, reject) => {
