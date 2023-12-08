@@ -8,9 +8,6 @@ const dbPath = path.join(__dirname, 'database.db');
 const db = new sqlite3.Database(dbPath);
 
 // Crear la tabla de artículos
-db.serialize(() => {
-  db.run('CREATE TABLE articles (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, marca TEXT, tipo TEXT, stock INTEGER)');
-});
 
 exports.getAllArticles = () => {
   return new Promise((resolve, reject) => {
