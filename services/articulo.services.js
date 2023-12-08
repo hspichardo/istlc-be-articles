@@ -5,7 +5,7 @@ const path = require('path');
 const dbPath = path.join(__dirname, 'database.db');
 
 
-let db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
+let db = new sqlite3.Database(':memory:', (err) => {
     if (err) {
       console.error(err.message);
     }
